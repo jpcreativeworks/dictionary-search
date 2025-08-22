@@ -1,0 +1,9 @@
+.App-header {
+  margin: 30px;
+}
+
+.Dictionary-logo, .text-header {
+  max-width: 320px;
+  display: block;
+  margin: 0 auto;
+}
