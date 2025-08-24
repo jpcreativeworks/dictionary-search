@@ -24,6 +24,7 @@ export default function Results(props) {
           definition={meaning.definition}
           example={meaning.example}
           synonyms={meaning.synonyms}
+          antonyms={meaning.antonyms}
           />
           
         ))}

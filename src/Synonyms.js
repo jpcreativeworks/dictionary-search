@@ -15,7 +15,7 @@ export default function Synonymns(props) {
               {synonyms}
             </li>
         ))}
-        </ul><br />
+        </ul>
       </li>
     </ul>
   );
