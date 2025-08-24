@@ -21,7 +21,7 @@ export default function Illustrations(props) {
     axios.get(url)
       .then(function (response) {
         if (isCancelled) return;
-        const urls = extractImageUrls(response.data).slice(0, maximumImages);
+        const urls = extractImageUrls(response.data, 800).slice(0, maximumImages);
         if (urls.length === 0) {
           setStatus("error");
         } else {
@@ -42,16 +42,17 @@ export default function Illustrations(props) {
   if (status === "error") return null;
 
   return (
-    <div className="row g-2 mt-2">
+    <div className="illustrations-grid">
       {imageUrls.map(function (url, index) {
         return (
-          <div key={index} className="col-6">
+          <div key={index} className="illustration-frame">
+          <div className="illustration-frame">
             <img
               src={url}
               alt={`Illustration for ${word}`}
               className="img-fluid rounded"
-              style={{ objectFit: "cover", width: "100%", height: 140 }}
             />
+          </div>
           </div>
         );
       })}
@@ -60,13 +61,27 @@ export default function Illustrations(props) {
 }
 
 
-function extractImageUrls(data) {
+function extractImageUrls(data, squareSize) {
   if (!data) return [];
 
   if (Array.isArray(data.photos)) {
     const urls = data.photos.map(function (photo) {
       if (!photo) return "";
       const source = photo.src || {};
+
+      if (typeof source.original === "string" && source.original) {
+        try {
+          const parsed = new URL(source.original);
+          parsed.searchParams.set("auto", "compress");
+          parsed.searchParams.set("cs", "tinysrgb");
+          parsed.searchParams.set("fit", "crop");
+          parsed.searchParams.set("w", String(squareSize));
+          parsed.searchParams.set("h", String(squareSize));
+          return parsed.toString();
+        } catch (_) {
+        }
+      }
+
       if (typeof source.medium === "string" && source.medium) return source.medium;
       if (typeof source.landscape === "string" && source.landscape) return source.landscape;
       if (typeof source.small === "string" && source.small) return source.small;

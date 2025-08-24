@@ -12,13 +12,15 @@ export default function Results(props) {
   if (!Array.isArray(meanings)) return null; 
   
   return (
-    <div className="my-3">
+    <div className="results-container">
+      <div className="results-header">
       <h3>
         {word}
         <Phonetics phonetic={phonetic} display="block"/>
       </h3>
+      </div>
       <Illustrations word={word} apiKey={imagesApiKey} maximumImages={2} />
-      <ul>
+      <ul className="definitions-list">
         {meanings.map((meaning, index) => (
           <DefinitionItem 
           key={index}
