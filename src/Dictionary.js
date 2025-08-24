@@ -39,6 +39,7 @@ export default function Dictionary() {
         word={definition?.word}
         phonetic={definition?.phonetic}
         meanings={definition?.meanings}
+        imagesApiKey={"7fd5430a29oa8949b4d239de06t9a3d4"}
        />
     </div>
   )
