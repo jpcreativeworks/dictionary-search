@@ -35,7 +35,11 @@ export default function Dictionary() {
         />
         <button type="submit">Search</button> 
       </form>
-      <Results results={definition} />
+      <Results 
+        word={definition?.word}
+        phonetic={definition?.phonetic}
+        meanings={definition?.meanings}
+       />
     </div>
   )
 }
