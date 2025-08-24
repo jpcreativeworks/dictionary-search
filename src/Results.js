@@ -1,5 +1,6 @@
 import React from "react"
 import DefinitionItem from "./DefinitionItem"
+import Phonetics from "./Phonetics";
 
 export default function Results(props) {
   const word = props.word;
@@ -8,11 +9,13 @@ export default function Results(props) {
 
   if (!Array.isArray(meanings)) return null; 
   
-
   return (
     <div className="my-3">
-      <h3>{word}</h3>
-      <h5>{phonetic ? <small className="text-muted ms-2">{phonetic}</small> : null}</h5>
+      <h3>
+        {word}
+        <Phonetics phonetic={phonetic} display="block"/>
+      </h3>
+      
       <ul>
         {meanings.map((meaning, index) => (
           <DefinitionItem 
